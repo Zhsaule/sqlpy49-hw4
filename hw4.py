@@ -7,14 +7,10 @@
 # 3 блок с SELECT запросами
 import sqlalchemy
 
-
 if __name__ == '__main__':
     db = 'postgresql://postgres:admin@localhost:5432/py49db'
     engine = sqlalchemy.create_engine(db)
     connection = engine.connect()
-    # fff = 327
-    # print(track_time(fff))
-
 
     # 1. название и год выхода альбомов, вышедших в 2018 году;
     sel = connection.execute("""
@@ -29,14 +25,12 @@ if __name__ == '__main__':
     """).fetchall()
     print(f'2. Самый длинный трек:\n{sel}')
 
-
     # 3. название треков, продолжительность которых не менее 3,5 минуты;
     sel = connection.execute("""
     SELECT track_name, to_char(concat(track_time)::interval,'MI:SS') 
     FROM track WHERE track.track_time >= 210;
     """).fetchall()
     print(f'3. Треки, продолжительность которых более 3,5 минуты:\n{sel}')
-
 
     # 4. названия сборников, вышедших в период с 2018 по 2020 год включительно;
     sel = connection.execute("""
@@ -50,11 +44,8 @@ if __name__ == '__main__':
     """).fetchall()
     print(f'5. Исполнители, чье имя состоит из 1 слова:\n{sel}')
 
-
     # 6. название треков, которые содержат слово "мой"/"my".
     sel = connection.execute("""
     SELECT * FROM track WHERE UPPER(track.track_name) like '%%MY%%' OR track.track_name like '%%МОЙ%%';
     """).fetchall()
     print(f'6. Название треков, которые содержат слово "мой"/"my":\n{sel}')
-
-

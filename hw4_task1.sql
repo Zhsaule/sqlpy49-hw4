@@ -17,7 +17,7 @@ drop table if exists ArtistGenre cascade ;
 drop table if exists ArtistAlbum cascade ;
 drop table if exists TrackCollection cascade ;
 
--- 1 блок СREATE запросы:
+-- 1 блок CREATE запросы:
 create table if not exists Genre (
     id serial primary key,
     genre_name varchar(100) not null unique
